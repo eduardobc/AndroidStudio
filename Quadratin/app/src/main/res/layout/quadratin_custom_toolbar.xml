@@ -1,0 +1,21 @@
+<android.support.v7.widget.Toolbar
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/quadratin_custom_toobar"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:minHeight="?attr/actionBarSize"
+android:background="@color/primary_dark"
+app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/quadratin_logo"
+        android:maxHeight="48dp"
+        android:adjustViewBounds="true" />
+
+    </android.support.v7.widget.Toolbar>
