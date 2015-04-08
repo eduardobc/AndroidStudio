@@ -1,16 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="wrap_content" android:paddingLeft="0dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    android:paddingBottom="0dp" tools:context=".quadratin_main"
+    android:paddingBottom="0dp"
+    tools:context=".quadratin_main"
     android:orientation="vertical"
     android:padding="0dp">
 
     <include
-        layout="@layout/quadratin_custom_toolbar"
+        layout="@layout/quadratin_custom_toolbar_intro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
-
 </LinearLayout>
