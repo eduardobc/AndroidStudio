@@ -19,7 +19,7 @@ public class activity_quadratin_main extends ActionBarActivity {
     QuadratinViewPagerAdapter adapter;
     SlidingTabLayout tabs;
     CharSequence Titles[] = {"MICHOACAN","OAXACA","CHIAPAS","GUANAJUATO","MORELOS","VERACRUZ","HIDALGO"};
-    int Numboftabs = 5;
+    int Numboftabs = Titles.length;
 
     /*end sliding tabs*/
 

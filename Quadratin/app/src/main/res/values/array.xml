@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Tags">
+        <item>Cultura</item>
+        <item>Deportes</item>
+        <item>Economia</item>
+        <item>Educacion</item>
+        <item>Salud</item>
+        <item>Justicia</item>
+        <item>Politica</item>
+        <item>Cultura</item>
+        <item>Deportes</item>
+        <item>Economia</item>
+        <item>Educacion</item>
+        <item>Salud</item>
+        <item>Justicia</item>
+        <item>Politica</item>
+    </string-array>
+</resources>

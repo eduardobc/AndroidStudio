@@ -40,9 +40,15 @@ public class activity_quadratin_splash_screen extends ActionBarActivity {
                 startActivity(quadratin_activity_intent_intro);
                 finish();
                 */
+                /*
                 Intent quadratin_activity_intent_main = new Intent(activity_quadratin_splash_screen.this,activity_quadratin_main.class);
                 startActivity(quadratin_activity_intent_main);
                 finish();
+                */
+                Intent dreawable_menu_main = new Intent(activity_quadratin_splash_screen.this,Dreawable_menu_main.class);
+                startActivity(dreawable_menu_main);
+                finish();
+
             }
         }.start();
     }
