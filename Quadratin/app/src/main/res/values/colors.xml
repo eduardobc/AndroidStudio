@@ -8,8 +8,13 @@
     <color name="secondary_text">#727272</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
-    <color name="tabBarColor">#ea682b</color>
-    <color name="tabsScrollColor">#1c3660</color>
     <color name="colorFFF">#ffffff</color>
     <color name="fontColor000">#000</color>
+
+
+    <color name="tabBarColor">#ea682b</color>
+    <color name="tabsScrollColor">#1c3660</color>
+    <color name="tabSelectedColorText">#ffffff</color>
+    <color name="tabColorText">#80ffffff</color>
 </resources>
+

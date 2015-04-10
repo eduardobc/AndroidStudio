@@ -225,7 +225,12 @@ public class SlidingTabLayout extends HorizontalScrollView {
             if (i == mViewPager.getCurrentItem()) {
                 tabView.setSelected(true);
             }
+
+            tabTitleView.setTextColor(getResources().getColorStateList(R.color.selector));
+            //tabTitleView.setTextSize(14);
+
         }
+
     }
 
     public void setContentDescription(int i, String desc) {
@@ -263,6 +268,11 @@ public class SlidingTabLayout extends HorizontalScrollView {
     private class InternalViewPagerListener implements ViewPager.OnPageChangeListener {
         private int mScrollState;
 
+        public void setBackgroundTab(int tabId, int resId) {
+            //set background textview color
+            ((TextView)mTabStrip.getChildAt(tabId)).setBackgroundResource(resId);
+        }
+
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             int tabStripChildCount = mTabStrip.getChildCount();
@@ -295,16 +305,26 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
         @Override
         public void onPageSelected(int position) {
+            int positionId = -1;
             if (mScrollState == ViewPager.SCROLL_STATE_IDLE) {
                 mTabStrip.onViewPagerPageChanged(position, 0f);
                 scrollToTab(position, 0);
             }
             for (int i = 0; i < mTabStrip.getChildCount(); i++) {
                 mTabStrip.getChildAt(i).setSelected(position == i);
+
+                //set background textview color
+                if(i == position) {
+                    setBackgroundTab(i,R.color.primary_dark);
+                } else {
+                    setBackgroundTab(i,R.color.tabBarColor);
+                }
+
             }
             if (mViewPagerPageChangeListener != null) {
                 mViewPagerPageChangeListener.onPageSelected(position);
             }
+
         }
 
     }

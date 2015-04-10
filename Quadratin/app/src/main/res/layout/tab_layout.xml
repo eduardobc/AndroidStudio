@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:layout_width="wrap_content"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:layout_height="38dp"
+    android:gravity="center"
+    android:textColor="@color/tabColorText"
+    android:textSize="14sp"
+    android:textStyle="bold"
+    android:textAllCaps="true"
+    android:autoText="false"
+    android:capitalize="characters"
+    android:enabled="false"
+    android:text="text"/>
