@@ -6,8 +6,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -59,16 +57,18 @@ public class Dreawable_menu_main extends ActionBarActivity {
 
         //new list
         ArrayList<DrawerItem> items = new ArrayList<DrawerItem>();
-        items.add(new DrawerItem("",R.drawable.quadratin_logo));
+        items.add(new DrawerItem("",R.drawable.quadratin_logo_dark,1));
         for(int i = 0 ; i < tagTitles.length; i++) {
-            items.add(new DrawerItem(tagTitles[i],R.mipmap.q_ic_launcher));
+            items.add(new DrawerItem(tagTitles[i],R.drawable.quadratin_arrow_right_icon,0));
         }
 
         //relations listening
         drawerList.setAdapter(new DrawerListAdapter(this, items));
 
+        //((ImageView)drawerList.getChildAt(0)).setMaxHeight(10);
+
         //show drawer
-        //drawerLayout.openDrawer(drawerList);
+        drawerLayout.openDrawer(drawerList);
 
         //ListView click item listener
         drawerList.setOnItemClickListener(new ListView.OnItemClickListener(){
@@ -146,7 +146,7 @@ public class Dreawable_menu_main extends ActionBarActivity {
 
 
     /* ========== start menu settings ========== */
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_quadratin_main, menu);
@@ -166,7 +166,7 @@ public class Dreawable_menu_main extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
     /* ========== end menu settings ========== */
 
 }

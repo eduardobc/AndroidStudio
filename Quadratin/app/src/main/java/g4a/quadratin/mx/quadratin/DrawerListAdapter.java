@@ -1,6 +1,7 @@
 package g4a.quadratin.mx.quadratin;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,17 +22,34 @@ public class DrawerListAdapter extends ArrayAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if( convertView == null ) {
-            LayoutInflater inflater = (LayoutInflater)parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.test_drawable_listview, null);
-        }
+        /*if( convertView == null ) {
+            Log.d("MENU","NULLL"+position);
+        } else {
+            Log.d("MENU","No - NULLL"+position);
+        }*/
 
-        ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
-        TextView name = (TextView) convertView.findViewById(R.id.name);
-
+        LayoutInflater inflater = (LayoutInflater)parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         DrawerItem item = (DrawerItem) getItem(position);
-        icon.setImageResource(item.getIconId());
-        name.setText(item.getName());
+
+
+            if (item.getType() == 0) {
+
+                convertView = inflater.inflate(R.layout.test_drawable_listview, null);
+                ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
+                TextView name = (TextView) convertView.findViewById(R.id.name);
+
+                icon.setImageResource(item.getIconId());
+                name.setText(item.getName());
+
+            } else {
+                //type header
+                convertView = inflater.inflate(R.layout.header, null);
+                ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
+
+                icon.setImageResource(item.getIconId());
+
+            }
+
 
         return convertView;
     }

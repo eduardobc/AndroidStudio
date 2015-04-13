@@ -159,6 +159,13 @@ public class SlidingTabLayout extends HorizontalScrollView {
             viewPager.setOnPageChangeListener(new InternalViewPagerListener());
             populateTabStrip();
         }
+        //set background color for the first tab when is running for first time
+        setBackgroundTab(0, R.color.primary_dark);
+    }
+
+    private void setBackgroundTab(int tabId, int resId) {
+        //set background textview color
+        //((TextView)mTabStrip.getChildAt(tabId)).setBackgroundResource(resId);
     }
 
     /**
@@ -181,6 +188,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
         int padding = (int) (TAB_VIEW_PADDING_DIPS * getResources().getDisplayMetrics().density);
         textView.setPadding(padding, padding, padding, padding);
+
+
 
         return textView;
     }
@@ -267,11 +276,6 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     private class InternalViewPagerListener implements ViewPager.OnPageChangeListener {
         private int mScrollState;
-
-        public void setBackgroundTab(int tabId, int resId) {
-            //set background textview color
-            ((TextView)mTabStrip.getChildAt(tabId)).setBackgroundResource(resId);
-        }
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

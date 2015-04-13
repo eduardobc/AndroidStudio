@@ -6,10 +6,12 @@ package g4a.quadratin.mx.quadratin;
 public class DrawerItem {
     private String name;
     private int iconId;
+    private int TYPE_HEADER = 0;
 
-    public DrawerItem(String name, int iconId) {
+    public DrawerItem(String name, int iconId, int type) {
         this.name = name;
         this.iconId = iconId;
+        this.TYPE_HEADER = type;
     }
 
     public DrawerItem(int iconId) {
@@ -30,6 +32,10 @@ public class DrawerItem {
 
     public void setIconId(int iconId) {
         this.iconId = iconId;
+    }
+
+    public int getType() {
+        return this.TYPE_HEADER;
     }
 
 }
