@@ -18,7 +18,9 @@ android {
         }
     }
     sourceSets {
-        main { res.srcDirs = ['src/main/res', 'src/main/res/selector', 'src/main/res/color'] }
+        main {
+            res.srcDirs = ['src/main/res', 'src/main/res/selector', 'src/main/res/color', 'src/main/res/drawable/images']
+        }
     }
 }
 
