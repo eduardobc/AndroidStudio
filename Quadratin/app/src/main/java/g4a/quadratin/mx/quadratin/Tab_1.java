@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,8 +62,8 @@ public class Tab_1 extends Fragment {
         grid_view.setAdapter(new Grid_adapter(view.getContext()));
 
         //events for each items of gridView
-        grid_view.setOnItemClickListener(new Click_listener());
-        grid_view.setOnItemLongClickListener(new Long_click_listener());
+        //grid_view.setOnItemClickListener(new Click_listener());
+        //grid_view.setOnItemLongClickListener(new Long_click_listener());
 
         return view;
     }
@@ -166,7 +167,7 @@ public class Tab_1 extends Fragment {
         }
     }
     private void iterchange_items_data() {
-
+        /*
         //item dragged
         ViewHolder item_dragged_vh_data;
         item_dragged_vh_data = (ViewHolder) item_vh_dragged.getTag();
@@ -202,7 +203,9 @@ public class Tab_1 extends Fragment {
         Log.i("grid_items_data despues","-----");
         print_grid_items_data();
         //set visible view item
+        */
         item_vh_dragged.setVisibility(View.VISIBLE);
+
     }
 
 
@@ -220,10 +223,15 @@ public class Tab_1 extends Fragment {
     }*/
     static class ViewHolder {
         int item_position;
-        public ViewHolder(int item_position) {
+        int item_sub_position;
+
+        public ViewHolder(int item_position, int item_sub_position) {
             this.item_position = item_position;
+            this.item_sub_position = item_sub_position;
         }
     }
+
+
     private class Grid_adapter extends BaseAdapter {
         private Context mContext;
 
@@ -257,22 +265,68 @@ public class Tab_1 extends Fragment {
                 grid = inflater.inflate(R.layout.tab_1_grid_adapter_layout, null);
 
                 //set item data from grid_items_data
-                ((Grid_item_data_source) grid_items_data[position]).item_index = position;
-                ((TextView) grid.findViewById(R.id.grid_text)).setText( ((Grid_item_data_source) grid_items_data[position]).item_title );
-                ((ImageView) grid.findViewById(R.id.grid_image)).setImageResource( ((Grid_item_data_source) grid_items_data[position]).item_image );
+                //((Grid_item_data_source) grid_items_data[position]).item_index = position;
+                //((TextView) grid.findViewById(R.id.grid_text)).setText( ((Grid_item_data_source) grid_items_data[position]).item_title );
+                //((ImageView) grid.findViewById(R.id.grid_image)).setImageResource( ((Grid_item_data_source) grid_items_data[position]).item_image );
+
+
+                //get child elements
+                RelativeLayout item_a = (RelativeLayout) grid.findViewById(R.id.grid_a_item);
+                RelativeLayout item_b = (RelativeLayout) grid.findViewById(R.id.grid_b_item);
+                RelativeLayout item_c = (RelativeLayout) grid.findViewById(R.id.grid_c_item);
+                //set Tag data
+                ViewHolder vh_a = new ViewHolder(position,1);
+                ViewHolder vh_b = new ViewHolder(position,2);
+                ViewHolder vh_c = new ViewHolder(position,3);
+                item_a.setTag(vh_a);
+                item_b.setTag(vh_b);
+                item_b.setTag(vh_c);
+
+
+                //item click
+                item_a.setOnLongClickListener(new Item_long_click_listener());
+                item_b.setOnLongClickListener(new Item_long_click_listener());
+                item_c.setOnLongClickListener(new Item_long_click_listener());
+
+
+
+
+
+                //DnD listener
+                item_a.setOnDragListener(new DragNDropListener());
+                item_b.setOnDragListener(new DragNDropListener());
+                item_c.setOnDragListener(new DragNDropListener());
+
+
 
                 //set data tag for the item
-                ViewHolder vh = new ViewHolder(position);
-                grid.setTag(vh);
+                //ViewHolder vh = new ViewHolder(position);
+                //grid.setTag(vh);
 
                 //DnD Listener
-                grid.setOnDragListener(new DragNDropListener());
+                //grid.setOnDragListener(new DragNDropListener());
             } else {
                 grid = (View) convertView;
             }
             return grid;
         }
 
+
+
+        private final class Item_long_click_listener implements View.OnLongClickListener {
+
+            @Override
+            public boolean onLongClick(View view) {
+                item_vh_dragged = view;
+                ClipData data = ClipData.newPlainText("clip_data","A-1");
+                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+                // start dragging the item touched
+                view.startDrag(data, shadowBuilder, view, 0);
+                item_vh_dragged.setVisibility(View.INVISIBLE);
+
+                return false;
+            }
+        }
     }
     /* End GridView Adapter */
 

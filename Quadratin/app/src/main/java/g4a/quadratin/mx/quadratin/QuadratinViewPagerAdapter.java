@@ -16,17 +16,6 @@ public class QuadratinViewPagerAdapter extends FragmentStatePagerAdapter {
     /*testing tab 1 data items*/
     public Object[] grid_items_data = new Object[] {
             new Grid_item_data_source("Cat 0",R.drawable.q_test_img_economia,0),
-            new Grid_item_data_source("Cat 1",R.drawable.q_test_img_cultura,0),
-            new Grid_item_data_source("Cat 2",R.drawable.q_test_img_politica,0),
-            new Grid_item_data_source("Cat 3",R.drawable.q_test_img_economia,0),
-            new Grid_item_data_source("Cat 4",R.drawable.q_test_img_cultura,0),
-            new Grid_item_data_source("Cat 5",R.drawable.q_test_img_politica,0),
-            new Grid_item_data_source("Cat 6",R.drawable.q_test_img_economia,0),
-            new Grid_item_data_source("Cat 7",R.drawable.q_test_img_cultura,0),
-            new Grid_item_data_source("Cat 8",R.drawable.q_test_img_politica,0),
-            new Grid_item_data_source("Cat 9",R.drawable.q_test_img_economia,0),
-            new Grid_item_data_source("Cat 10",R.drawable.q_test_img_cultura,0),
-            new Grid_item_data_source("Cat 11",R.drawable.q_test_img_politica,0),
     };
 
 

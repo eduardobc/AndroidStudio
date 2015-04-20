@@ -6,7 +6,7 @@ package g4a.quadratin.mx.quadratin;
 public class Grid_item_data_source {
     String item_title;
     Integer item_image;
-    int item_index;
+    Integer item_index;
 
     public Grid_item_data_source(String item_title, Integer item_image,int item_index) {
         this.item_title = item_title;
