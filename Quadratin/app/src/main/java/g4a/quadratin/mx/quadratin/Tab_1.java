@@ -20,6 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 /**
  * Created by eduardo on 4/8/15.
  */
@@ -29,13 +31,23 @@ public class Tab_1 extends Fragment {
     /* end Tab data */
 
     /* start gridview */
-    private GridView grid_view;
-    private Object[] grid_items_data = new Object[] {
-            new Grid_item_data_source("Cat 0",R.drawable.quadratin_logo_dark,0),
-            new Grid_item_data_source("Cat 1",R.mipmap.q_ic_launcher,0),
-            new Grid_item_data_source("Cat 2",R.drawable.quadratin_logo_dark,0),
-            new Grid_item_data_source("Cat 3",R.mipmap.q_ic_launcher,0),
+    private Integer grid_layouts[] = new Integer[]{
+            R.layout.grid_type_a,
+            R.layout.grid_type_b,
+            R.layout.grid_type_c,
+            R.layout.grid_type_d,
+            R.layout.grid_type_e,
     };
+    private Integer grid_layout_containers[] = new Integer[]{
+            R.id.grid_container_a,
+            R.id.grid_container_b,
+            R.id.grid_container_c,
+            R.id.grid_container_d,
+            R.id.grid_container_e,
+    };
+    private GridView grid_view;
+    private Object[] grid_items_data;
+    private Grid_item_data_group[] grid_item_data_groups;
     /* end gridview */
 
     /* start DnD */
@@ -44,8 +56,58 @@ public class Tab_1 extends Fragment {
     /* end DnD */
 
 
+
+    //Start functions to fix all items in rows for the adapter
+    public void Grid_item_data_fixed() {
+
+    }
+    //End functions to fix all items in rows for the adapter
+
     public Tab_1(Object[] data_source) {
         grid_items_data = data_source;
+        int items_count = 0;
+        int grid_item_data_group_count = 0;
+        //set total items to show
+        grid_item_data_groups = new Grid_item_data_group[3];
+
+        //group A or B. 3 items
+        int type_layout = 0;
+        int total_group_a = (grid_items_data.length/3);
+        if( total_group_a > 0 ) {
+
+            for(int i=0; i<total_group_a; i++ ) {//iterate rows of 3 items each one
+                Object group[] = new Object[3];
+                group[0] = grid_items_data[items_count++];
+                group[1] = grid_items_data[items_count++];
+                group[2] = grid_items_data[items_count++];
+                grid_item_data_groups[grid_item_data_group_count++] = new Grid_item_data_group(type_layout,group);
+                if( type_layout == 0 )
+                    type_layout = 1;
+                else
+                    type_layout = 0;
+            }
+        }
+        //group C or D. 2 items
+        type_layout = 2;
+        if( items_count < grid_items_data.length ) {
+            int total_group_b = ((grid_items_data.length-items_count)/2);
+            if( total_group_b > 0 ) {
+
+                //grid_item_data_groups = new Grid_item_data_group[total_group_b];
+                for(int i=0; i<total_group_b; i++ ) {//iterate rows of 3 items each one
+                    Object group[] = new Object[2];
+                    group[0] = grid_items_data[items_count++];
+                    group[1] = grid_items_data[items_count++];
+                    grid_item_data_groups[grid_item_data_group_count++] = new Grid_item_data_group(type_layout,group);
+                    if( type_layout == 2 )
+                        type_layout = 3;
+                    else
+                        type_layout = 2;
+                }
+            }
+        }
+
+
     }
 
     public void tab_edit_content(String title) {
@@ -61,41 +123,12 @@ public class Tab_1 extends Fragment {
         //set data to the gridView
         grid_view.setAdapter(new Grid_adapter(view.getContext()));
 
-        //events for each items of gridView
-        //grid_view.setOnItemClickListener(new Click_listener());
-        //grid_view.setOnItemLongClickListener(new Long_click_listener());
-
         return view;
     }
 
 
 
-    //lick listener
-    private final class Click_listener implements AdapterView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(view.getContext(),"Click - "+position,Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    //long click listener
-    private final class Long_click_listener implements AdapterView.OnItemLongClickListener {
-
-        @Override
-        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-            item_vh_dragged = view;
-            ClipData data = ClipData.newPlainText("clip_data",""+position);
-            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-            // start dragging the item touched
-            view.startDrag(data, shadowBuilder, view, 0);
-            item_vh_dragged.setVisibility(View.INVISIBLE);
-            return false;
-        }
-    }
-
-    //DragNDrop listener
+    //Start DragNDrop listener
     private class DragNDropListener implements AdapterView.OnDragListener {
 
         @Override
@@ -153,12 +186,14 @@ public class Tab_1 extends Fragment {
                     return true;
                 // An unknown action type was received.
                 default:
+                    item_vh_dragged.setVisibility(View.VISIBLE);
                     //Log.i("DragDrop Example","Unknown action type received by OnDragListener.");
                 break;
             }
             return false;
         }
     }
+    //End DragNDrop listener
 
     private void print_grid_items_data() {
 
@@ -166,6 +201,7 @@ public class Tab_1 extends Fragment {
             Log.i("item", "i="+i+" = "+((Grid_item_data_source)grid_items_data[i]).item_title);
         }
     }
+
     private void iterchange_items_data() {
         /*
         //item dragged
@@ -204,30 +240,18 @@ public class Tab_1 extends Fragment {
         print_grid_items_data();
         //set visible view item
         */
-        item_vh_dragged.setVisibility(View.VISIBLE);
+
 
     }
 
 
-    /* Start GridView Adapter */
-    /*static class Grid_item_data_source {
-        String item_title;
-        Integer item_image;
-        int item_index;
-
-        public Grid_item_data_source(String item_title, Integer item_image,int item_index) {
-            this.item_title = item_title;
-            this.item_image = item_image;
-            this.item_index = item_index;
-        }
-    }*/
     static class ViewHolder {
+        int item_position_parent;
         int item_position;
-        int item_sub_position;
 
-        public ViewHolder(int item_position, int item_sub_position) {
+        public ViewHolder(int item_position_parent, int item_position) {
+            this.item_position_parent = item_position_parent;
             this.item_position = item_position;
-            this.item_sub_position = item_sub_position;
         }
     }
 
@@ -242,7 +266,7 @@ public class Tab_1 extends Fragment {
 
         @Override
         public int getCount() {
-            return grid_items_data.length;
+            return grid_item_data_groups.length;
         }
 
         @Override
@@ -258,57 +282,123 @@ public class Tab_1 extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             // Creates a new drag event listener
-            View grid;
+            View layout_grid;
+            Grid_item_data_group item_group;
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
             if( convertView == null ) {
-                //set layout for the item
-                grid = inflater.inflate(R.layout.tab_1_grid_adapter_layout, null);
+                //just creating the view if not already present
 
-                //set item data from grid_items_data
-                //((Grid_item_data_source) grid_items_data[position]).item_index = position;
-                //((TextView) grid.findViewById(R.id.grid_text)).setText( ((Grid_item_data_source) grid_items_data[position]).item_title );
-                //((ImageView) grid.findViewById(R.id.grid_image)).setImageResource( ((Grid_item_data_source) grid_items_data[position]).item_image );
+                item_group = (Grid_item_data_group) grid_item_data_groups[position];
+                if( item_group.grid_layout == 0 || item_group.grid_layout == 1 ) {
+                    //set layout for the item
+                    layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
+                    //get data from data source array
+                    Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
+                    Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
+                    Grid_item_data_source item_data_c = ((Grid_item_data_source) item_group.group_items[2]);
 
+                    //get child elements
+                    ViewGroup group_container = ((ViewGroup) layout_grid.findViewById(grid_layout_containers[item_group.grid_layout]));
+                    RelativeLayout item_aa = (RelativeLayout) group_container.getChildAt(0);
+                    RelativeLayout item_bb = (RelativeLayout) group_container.getChildAt(1);
+                    RelativeLayout item_cc = (RelativeLayout) group_container.getChildAt(2);
+                    //set data to items
+                    ((ImageView) ((ViewGroup)item_aa).getChildAt(0)).setImageResource(item_data_a.item_image);
+                    ((ImageView) ((ViewGroup)item_bb).getChildAt(0)).setImageResource(item_data_b.item_image);
+                    ((ImageView) ((ViewGroup)item_cc).getChildAt(0)).setImageResource(item_data_c.item_image);
 
-                //get child elements
-                RelativeLayout item_a = (RelativeLayout) grid.findViewById(R.id.grid_a_item);
-                RelativeLayout item_b = (RelativeLayout) grid.findViewById(R.id.grid_b_item);
-                RelativeLayout item_c = (RelativeLayout) grid.findViewById(R.id.grid_c_item);
-                //set Tag data
-                ViewHolder vh_a = new ViewHolder(position,1);
-                ViewHolder vh_b = new ViewHolder(position,2);
-                ViewHolder vh_c = new ViewHolder(position,3);
-                item_a.setTag(vh_a);
-                item_b.setTag(vh_b);
-                item_b.setTag(vh_c);
+                    //item click
+                    item_aa.setOnLongClickListener(new Item_long_click_listener());
+                    item_bb.setOnLongClickListener(new Item_long_click_listener());
+                    item_cc.setOnLongClickListener(new Item_long_click_listener());
 
+                    //DnD listener
+                    item_aa.setOnDragListener(new DragNDropListener());
+                    item_bb.setOnDragListener(new DragNDropListener());
+                    item_cc.setOnDragListener(new DragNDropListener());
+                } else if ( item_group.grid_layout == 2 || item_group.grid_layout == 3 ) {
+                    //set layout for the item
+                    layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
+                    //get data from data source array
+                    Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
+                    Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
+                    //get child elements
+                    ViewGroup group_container = ((ViewGroup) layout_grid.findViewById(grid_layout_containers[item_group.grid_layout]));
+                    RelativeLayout item_aa = (RelativeLayout) group_container.getChildAt(0);
+                    RelativeLayout item_bb = (RelativeLayout) group_container.getChildAt(1);
+                    //set data to items
+                    ((ImageView) ((ViewGroup)item_aa).getChildAt(0)).setImageResource(item_data_a.item_image);
+                    ((ImageView) ((ViewGroup)item_bb).getChildAt(0)).setImageResource(item_data_b.item_image);
+                    //item click
+                    item_aa.setOnLongClickListener(new Item_long_click_listener());
+                    item_bb.setOnLongClickListener(new Item_long_click_listener());
 
-                //item click
-                item_a.setOnLongClickListener(new Item_long_click_listener());
-                item_b.setOnLongClickListener(new Item_long_click_listener());
-                item_c.setOnLongClickListener(new Item_long_click_listener());
+                    //DnD listener
+                    item_aa.setOnDragListener(new DragNDropListener());
+                    item_bb.setOnDragListener(new DragNDropListener());
 
+                } else {
+                    //set layout for the item
+                    layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
+               }
 
-
-
-
-                //DnD listener
-                item_a.setOnDragListener(new DragNDropListener());
-                item_b.setOnDragListener(new DragNDropListener());
-                item_c.setOnDragListener(new DragNDropListener());
-
-
-
-                //set data tag for the item
-                //ViewHolder vh = new ViewHolder(position);
-                //grid.setTag(vh);
-
-                //DnD Listener
-                //grid.setOnDragListener(new DragNDropListener());
             } else {
-                grid = (View) convertView;
+                //re-using if already here
+                layout_grid = convertView;
+                item_group = (Grid_item_data_group) grid_item_data_groups[position];
+                if( item_group.grid_layout == 0 || item_group.grid_layout == 1 ) {
+                    layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
+                    //get data from data source array
+                    Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
+                    Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
+                    Grid_item_data_source item_data_c = ((Grid_item_data_source) item_group.group_items[2]);
+
+                    //get child elements
+                    ViewGroup group_container = ((ViewGroup) layout_grid.findViewById(grid_layout_containers[item_group.grid_layout]));
+                    RelativeLayout item_aa = (RelativeLayout) group_container.getChildAt(0);
+                    RelativeLayout item_bb = (RelativeLayout) group_container.getChildAt(1);
+                    RelativeLayout item_cc = (RelativeLayout) group_container.getChildAt(2);
+                    //set data to items
+                    ((ImageView) ((ViewGroup)item_aa).getChildAt(0)).setImageResource(item_data_a.item_image);
+                    ((ImageView) ((ViewGroup)item_bb).getChildAt(0)).setImageResource(item_data_b.item_image);
+                    ((ImageView) ((ViewGroup)item_cc).getChildAt(0)).setImageResource(item_data_c.item_image);
+
+
+                    //item click
+                    item_aa.setOnLongClickListener(new Item_long_click_listener());
+                    item_bb.setOnLongClickListener(new Item_long_click_listener());
+                    item_cc.setOnLongClickListener(new Item_long_click_listener());
+
+                    //DnD listener
+                    item_aa.setOnDragListener(new DragNDropListener());
+                    item_bb.setOnDragListener(new DragNDropListener());
+                    item_cc.setOnDragListener(new DragNDropListener());
+                } else if ( item_group.grid_layout == 2 || item_group.grid_layout == 3 ) {
+                    //set layout for the item
+                    layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
+                    //get data from data source array
+                    Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
+                    Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
+                    //get child elements
+                    ViewGroup group_container = ((ViewGroup) layout_grid.findViewById(grid_layout_containers[item_group.grid_layout]));
+                    RelativeLayout item_aa = (RelativeLayout) group_container.getChildAt(0);
+                    RelativeLayout item_bb = (RelativeLayout) group_container.getChildAt(1);
+                    //set data to items
+                    ((ImageView) ((ViewGroup)item_aa).getChildAt(0)).setImageResource(item_data_a.item_image);
+                    ((ImageView) ((ViewGroup)item_bb).getChildAt(0)).setImageResource(item_data_b.item_image);
+                    //item click
+                    item_aa.setOnLongClickListener(new Item_long_click_listener());
+                    item_bb.setOnLongClickListener(new Item_long_click_listener());
+
+                    //DnD listener
+                    item_aa.setOnDragListener(new DragNDropListener());
+                    item_bb.setOnDragListener(new DragNDropListener());
+
+                }
             }
-            return grid;
+
+            return layout_grid;
         }
 
 
