@@ -17,8 +17,7 @@
         android:layout_weight="1"
         android:layout_width="1sp"
         android:layout_height="100sp"
-        android:padding="1dp"
-        android:scaleType="centerCrop">
+        android:padding="1dp">
         <ImageView
             android:id="@+id/grid_img_a"
             android:layout_centerVertical="true"
@@ -40,8 +39,7 @@
         android:layout_weight="2"
         android:layout_width="1sp"
         android:layout_height="100sp"
-        android:padding="1dp"
-        android:scaleType="centerCrop">
+        android:padding="1dp">
         <ImageView
             android:id="@+id/grid_img_b"
             android:layout_centerVertical="true"

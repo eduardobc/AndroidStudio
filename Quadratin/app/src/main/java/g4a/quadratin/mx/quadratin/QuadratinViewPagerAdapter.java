@@ -18,11 +18,23 @@ public class QuadratinViewPagerAdapter extends FragmentStatePagerAdapter {
             new Grid_item_data_source(0,0,"Economia",R.drawable.q_test_img_economia),
             new Grid_item_data_source(0,0,"Cultura",R.drawable.q_test_img_cultura),
             new Grid_item_data_source(0,0,"Politica",R.drawable.q_test_img_politica),
-
             new Grid_item_data_source(0,0,"Economia",R.drawable.q_test_img_economia),
             new Grid_item_data_source(0,0,"Cultura",R.drawable.q_test_img_cultura),
             new Grid_item_data_source(0,0,"Politica",R.drawable.q_test_img_politica),
-
+            new Grid_item_data_source(0,0,"Economia",R.drawable.q_test_img_economia),
+            new Grid_item_data_source(0,0,"Cultura",R.drawable.q_test_img_cultura),
+            new Grid_item_data_source(0,0,"Politica",R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,"Economia",R.drawable.q_test_img_economia),
+            new Grid_item_data_source(0,0,"Cultura",R.drawable.q_test_img_cultura),
+            new Grid_item_data_source(0,0,"Economia",R.drawable.q_test_img_economia),
+            new Grid_item_data_source(0,0,"Cultura",R.drawable.q_test_img_cultura),
+            new Grid_item_data_source(0,0,"Politica",R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,"Economia",R.drawable.q_test_img_economia),
+            new Grid_item_data_source(0,0,"Cultura",R.drawable.q_test_img_cultura),
+            new Grid_item_data_source(0,0,"Politica",R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,"Economia",R.drawable.q_test_img_economia),
+            new Grid_item_data_source(0,0,"Cultura",R.drawable.q_test_img_cultura),
+            new Grid_item_data_source(0,0,"Politica",R.drawable.q_test_img_politica),
             new Grid_item_data_source(0,0,"Economia",R.drawable.q_test_img_economia),
             new Grid_item_data_source(0,0,"Cultura",R.drawable.q_test_img_cultura),
 
@@ -44,12 +56,14 @@ public class QuadratinViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
 
         if( position == 0 ) {
-            Tab_1 tab1 = new Tab_1(grid_items_data);
+            Tab_1 tab1 = new Tab_1();
+            tab1.Tab_1_set_data(grid_items_data);
             tab1.tab_edit_content(Titles[position].toString());
             return tab1;
         }
         else if( position == 1 ) {
-            Tab_2 tab2 = new Tab_2(grid_items_data);
+            Tab_2 tab2 = new Tab_2();
+            tab2.Tab_2_set_data(grid_items_data);
             tab2.tab_edit_content(Titles[position].toString());
             return tab2;
         }

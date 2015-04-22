@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="100sp"
     android:orientation="horizontal"
     android:layout_alignParentBottom="true"
     android:layout_alignParentLeft="true"
@@ -15,8 +15,8 @@
         android:id="@+id/grid_e_item_a"
         android:layout_gravity="fill_horizontal"
         android:layout_weight="1"
-        android:layout_width="1sp"
-        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="100sp"
         android:padding="1dp">
         <ImageView
             android:id="@+id/grid_img_a"
