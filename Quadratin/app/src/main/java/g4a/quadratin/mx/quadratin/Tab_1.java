@@ -311,8 +311,8 @@ public class Tab_1 extends Fragment {
             Grid_item_data_group item_group = null;
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            if (convertView == null) {
-                //just creating the view if not already present
+            if ( convertView == null ) {
+                // just creating the view if not already present
 
                 item_group = (Grid_item_data_group) grid_item_data_groups[position];
                 if (item_group.grid_layout == 0)
@@ -327,10 +327,11 @@ public class Tab_1 extends Fragment {
                     layout_grid = grid_layout_e_inflate(layout_grid, inflater, item_group, position);
 
             } else {
-                //re-using if already here
+                // use existing
 
                 layout_grid = convertView;
-                item_group = (Grid_item_data_group) grid_item_data_groups[position];
+                Log.i("GRID Position",""+position);
+                /*item_group = (Grid_item_data_group) grid_item_data_groups[position];
                 if (item_group.grid_layout == 0)
                     layout_grid = grid_layout_a_inflate(layout_grid, inflater, item_group, position);
                 else if (item_group.grid_layout == 1)
@@ -340,7 +341,7 @@ public class Tab_1 extends Fragment {
                 else if (item_group.grid_layout == 3)
                     layout_grid = grid_layout_d_inflate(layout_grid, inflater, item_group, position);
                 else
-                    layout_grid = grid_layout_e_inflate(layout_grid, inflater, item_group, position);
+                    layout_grid = grid_layout_e_inflate(layout_grid, inflater, item_group, position);*/
             }
 
             return layout_grid;

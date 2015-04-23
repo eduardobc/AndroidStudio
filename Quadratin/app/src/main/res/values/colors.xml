@@ -16,5 +16,9 @@
     <color name="tabsScrollColor">#1c3660</color>
     <color name="tabSelectedColorText">#ffffff</color>
     <color name="tabColorText">#80ffffff</color>
+
+    <color name="cardContentBkgColor">#90000000</color>
+    <color name="CardContentTextColorOrange">#ea682b</color>
+    <color name="CardContentTextColorwhite">#FFFFFF</color>
 </resources>
 
