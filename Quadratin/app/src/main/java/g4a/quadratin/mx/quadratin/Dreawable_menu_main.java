@@ -75,12 +75,12 @@ public class Dreawable_menu_main extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("MENU Position", "pos=" + position);
-
+                //this update a fragment, but it is not in use
 
                 //get fragment and show
-                /*drawer_fragment fragment = new drawer_fragment();
+                /*DrawerMenuFragment fragment = new DrawerMenuFragment();
                 Bundle args = new Bundle();
-                args.putInt(drawer_fragment.ARG_ARTICLES_NUMBER, position);
+                args.putInt(DrawerMenuFragment.ARG_ARTICLES_NUMBER, position);
                 fragment.setArguments(args);
 
                 //change content fragment
@@ -120,7 +120,7 @@ public class Dreawable_menu_main extends ActionBarActivity {
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
-            Log.d("TAB","Pos = "+position);
+            //Log.d("TAB","Pos = "+position);
             return getResources().getColor(R.color.tabsScrollColor);
             }
         });

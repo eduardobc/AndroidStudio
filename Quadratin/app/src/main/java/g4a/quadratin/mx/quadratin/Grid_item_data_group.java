@@ -18,7 +18,7 @@ public class Grid_item_data_group {
 
         for( int i=0; i<group_items.length; i++ ) {
             Grid_item_data_source item = ((Grid_item_data_source) group_items[i]);
-            Log.i("Grid_item_data_group",item.item_title);
+            Log.i("Grid_item_data_group",item.item_category_title);
         }
     }
 }

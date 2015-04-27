@@ -20,5 +20,6 @@
     <color name="cardContentBkgColor">#90000000</color>
     <color name="CardContentTextColorOrange">#ea682b</color>
     <color name="CardContentTextColorwhite">#FFFFFF</color>
+    <color name="CardBkgColor">#444444</color>
 </resources>
 

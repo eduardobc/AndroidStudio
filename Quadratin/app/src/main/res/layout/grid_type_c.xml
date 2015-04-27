@@ -28,8 +28,8 @@
             android:layout_alignParentRight="true"
             android:adjustViewBounds="true"
             android:padding="0dp"
-            android:src="@drawable/q_test_img_cultura"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:background="@color/CardBkgColor"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -97,8 +97,8 @@
             android:layout_alignParentRight="true"
             android:adjustViewBounds="true"
             android:padding="0dp"
-            android:src="@drawable/q_test_img_cultura"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:background="@color/CardBkgColor"/>
 
         <LinearLayout
             android:orientation="vertical"
