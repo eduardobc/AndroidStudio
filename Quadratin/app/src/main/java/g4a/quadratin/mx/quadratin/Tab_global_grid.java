@@ -20,20 +20,23 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.net.URL;
+
 /**
  * Created by eduardo on 4/8/15.
  */
 public class Tab_global_grid extends Fragment {
 
-    private MyAsyncTask myTask;
+    //start fragment vars
     private View root_view;
     private LinearLayout root_scroll_view;
+    //end fragment vars
 
-    private String tab_title = "-";
+    //start grid data vars
     private int grid_items_count = 0;
     private int grid_view_total_rows = 0;
     private boolean grid_iteration_finish = false;
-
+    //end grid data vars
 
     /*Start grid data*/
     //Grid Layouts
@@ -57,6 +60,9 @@ public class Tab_global_grid extends Fragment {
     private View item_vh_dragged;//current item dragging
     private View item_vh_dropped;//current item dropping
     /*End grid data*/
+
+
+
 
     private void grid_total_row_items() {
         //A=3
@@ -151,28 +157,26 @@ public class Tab_global_grid extends Fragment {
         grid_total_row_items();
         grid_iteration_finish = false;
         grid_items_count = 0;
-        Log.i("GRID TOTAL ROWS",""+grid_view_total_rows);
+        //Log.i("GRID TOTAL ROWS",""+grid_view_total_rows);
         grid_item_data_groups = new Grid_item_data_group[grid_view_total_rows];
         grid_fill_items_rows();
     }
 
-    public void tab_set_title(String title) {
-        tab_title = title;
-    }
+
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root_view = inflater.inflate(R.layout.tab_global_layout,container,false);
         root_scroll_view = (LinearLayout) root_view.findViewById(R.id.linear_layout);
-        //fill
-        root_view = fill_root_view(root_view);
 
+        //fill fragment layout
+        //root_view = fill_root_view();
 
-        /*
-        setRetainInstance(true);
-        myTask = new MyAsyncTask(getActivity(),root_view);
-        myTask.execute();
-        */
+        new FillGridTask().execute();
+
         return root_view;
     }
 
@@ -183,13 +187,89 @@ public class Tab_global_grid extends Fragment {
 
 
 
-    private View fill_root_view(View root_view) {
 
 
-        for( int position=0; position<26; position++ ) {
+
+    /*START THREAD in BACKGROUND*/
+    public void inflate_rows() {
+        new FillGridTask().execute();
+    }
+
+
+    private class FillGridTask extends AsyncTask<String, Integer, Integer> {
+
+        protected Integer doInBackground(String... strings) {
+
+            Log.i("AsyncTask","doInBackground");
+            return 1;
+        }
+
+        protected void onProgressUpdate(Integer... progress) {
+            Log.i("AsyncTask","onProgressUpdate");
+        }
+
+        protected void onPostExecute(Integer result) {
+            Log.i("AsyncTask","onPostExecute");
+            fill_root_view();
+        }
+    }
+
+    private class FillRowTask extends AsyncTask<Integer, Integer, Integer> {
+        private Integer position;
+        private View layout_grid = null;
+        private Grid_item_data_group item_group = null;
+        private LayoutInflater inflater;
+
+        protected Integer doInBackground(Integer... positions) {
+
+            Log.i("FillRowTask","doInBackground");
+            position = positions[0];
+
+            inflater = (LayoutInflater) root_view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            item_group = (Grid_item_data_group) grid_item_data_groups[position];
+            if (item_group.grid_layout == 0)
+                layout_grid = grid_layout_a_inflate(layout_grid, inflater, item_group, position);
+            else if (item_group.grid_layout == 1)
+                layout_grid = grid_layout_b_inflate(layout_grid, inflater, item_group, position);
+            else if (item_group.grid_layout == 2)
+                layout_grid = grid_layout_c_inflate(layout_grid, inflater, item_group, position);
+            else if (item_group.grid_layout == 3)
+                layout_grid = grid_layout_d_inflate(layout_grid, inflater, item_group, position);
+            else
+                layout_grid = grid_layout_e_inflate(layout_grid, inflater, item_group, position);
+
+            return 1;
+        }
+
+        protected void onProgressUpdate(Integer... progress) {
+            Log.i("FillRowTask","onProgressUpdate");
+        }
+
+        protected void onPostExecute(Integer result) {
+            Log.i("FillRowTask","onPostExecute");
+            //append layout_grid to root_view
+            root_scroll_view.addView(layout_grid);
+        }
+    }
+
+
+    /*START THREAD in BACKGROUND*/
+
+
+
+
+
+
+
+
+
+    private View fill_root_view() {
+
+
+        /*for( int position=0; position<grid_item_data_groups.length; position++ ) {
             View layout_grid = null;
             Grid_item_data_group item_group = null;
-            LayoutInflater inflater = (LayoutInflater) root_scroll_view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) root_view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             item_group = (Grid_item_data_group) grid_item_data_groups[position];
             if (item_group.grid_layout == 0)
@@ -206,57 +286,45 @@ public class Tab_global_grid extends Fragment {
             //append layout_grid to root_view
             root_scroll_view.addView(layout_grid);
         }
+        */
+        for( int position=0; position<grid_item_data_groups.length; position++ ) {
+            new FillRowTask().execute(position);
+        }
+
         return root_view;
     }
 
 
 
-    private void populate_result_task() {
-        Log.i("THREAD","FINISH");
-        setRetainInstance(false);
-    }
-    private class MyAsyncTask extends AsyncTask<String, Void, String>{
-        Activity context;
-        View root_view;
-
-        public  MyAsyncTask(Activity context,View root_view) {
-            this.context = context;
-            this.root_view = root_view;
-        }
 
 
 
-        @Override
-        protected String doInBackground(String... params) {
-
-            View layout_grid = null;
-            Grid_item_data_group item_group = null;
-            LayoutInflater inflater = (LayoutInflater) root_scroll_view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
-            for( int position=0; position<grid_item_data_groups.length; position++ ) {
 
-                item_group = (Grid_item_data_group) grid_item_data_groups[position];
-                if (item_group.grid_layout == 0)
-                    layout_grid = grid_layout_a_inflate(layout_grid, inflater, item_group, position);
-                else if (item_group.grid_layout == 1)
-                    layout_grid = grid_layout_b_inflate(layout_grid, inflater, item_group, position);
-                else if (item_group.grid_layout == 2)
-                    layout_grid = grid_layout_c_inflate(layout_grid, inflater, item_group, position);
-                else if (item_group.grid_layout == 3)
-                    layout_grid = grid_layout_d_inflate(layout_grid, inflater, item_group, position);
-                else
-                    layout_grid = grid_layout_e_inflate(layout_grid, inflater, item_group, position);
-                //append layout_grid to root_view
-                root_scroll_view.addView(layout_grid);
 
-            }
 
-            populate_result_task();
-            return null;
-        }
 
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -353,7 +421,7 @@ public class Tab_global_grid extends Fragment {
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
         //get data from data source array
-        /*Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
+        Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
         Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
         Grid_item_data_source item_data_c = ((Grid_item_data_source) item_group.group_items[2]);
 
@@ -385,7 +453,7 @@ public class Tab_global_grid extends Fragment {
         item_aa.setOnDragListener(new DragNDropListener());
         item_bb.setOnDragListener(new DragNDropListener());
         item_cc.setOnDragListener(new DragNDropListener());
-        */
+
 
         return layout_grid;
     }
@@ -396,7 +464,7 @@ public class Tab_global_grid extends Fragment {
     private View grid_layout_b_inflate(View layout_grid, LayoutInflater inflater, Grid_item_data_group item_group, int position) {
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
-        /*
+
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
         Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
@@ -425,14 +493,14 @@ public class Tab_global_grid extends Fragment {
         item_aa.setOnDragListener(new DragNDropListener());
         item_bb.setOnDragListener(new DragNDropListener());
         item_cc.setOnDragListener(new DragNDropListener());
-        */
+
         return layout_grid;
     }
 
     private View grid_layout_c_inflate(View layout_grid, LayoutInflater inflater, Grid_item_data_group item_group, int position) {
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
-        /*
+
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
         Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
@@ -454,14 +522,14 @@ public class Tab_global_grid extends Fragment {
         //DnD listener
         item_aa.setOnDragListener(new DragNDropListener());
         item_bb.setOnDragListener(new DragNDropListener());
-        */
+
         return layout_grid;
     }
 
     private View grid_layout_d_inflate(View layout_grid, LayoutInflater inflater, Grid_item_data_group item_group, int position) {
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
-        /*
+
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
         Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
@@ -484,14 +552,14 @@ public class Tab_global_grid extends Fragment {
         //DnD listener
         item_aa.setOnDragListener(new DragNDropListener());
         item_bb.setOnDragListener(new DragNDropListener());
-        */
+
         return layout_grid;
     }
 
     private View grid_layout_e_inflate(View layout_grid, LayoutInflater inflater, Grid_item_data_group item_group, int position) {
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
-        /*
+
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
         //get child elements
@@ -506,7 +574,7 @@ public class Tab_global_grid extends Fragment {
         item_aa.setOnLongClickListener(new Item_long_click_listener());
         //DnD listener
         item_aa.setOnDragListener(new DragNDropListener());
-        */
+
         return layout_grid;
     }
 }

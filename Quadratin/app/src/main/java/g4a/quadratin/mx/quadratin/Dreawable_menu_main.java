@@ -21,8 +21,43 @@ public class Dreawable_menu_main extends ActionBarActivity {
     ViewPager pager;
     QuadratinViewPagerAdapter adapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[] = {"MICHOACAN","OAXACA","CHIAPAS","GUANAJUATO","MORELOS","VERACRUZ","HIDALGO"};
+    CharSequence Titles[] = {
+            "Aguascalientes",
+            "Baja California Norte",
+            "Baja California Sur",
+            "Campeche",
+            "Chiapas",
+            "Chihuahua",
+            "Coahuila",
+            "Colima",
+            "Distrito Federal",
+            "Durango",
+            "Guanajuato",
+            "Guerrero",
+            "Hidalgo",
+            "Jalisco",
+            "México",
+            "Michoacán",
+            "Morelos",
+            "Nayarit",
+            "Nuevo León",
+            "Oaxaca",
+            "Puebla",
+            "Querétaro",
+            "Quintana Roo",
+            "San Luis Potos",
+            "Sinaloa",
+            "Sonora",
+            "Tabasco",
+            "Tamaulipas",
+            "Tlaxcala",
+            "Veracruz",
+            "Yucatán",
+            "Zacatecas",
+    };
     int Numboftabs = Titles.length;
+
+
 
     /*end sliding tabs*/
 
