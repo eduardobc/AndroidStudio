@@ -45,7 +45,7 @@ public class Dreawable_menu_main extends ActionBarActivity {
             "Puebla",
             "Querétaro",
             "Quintana Roo",
-            "San Luis Potos",
+            "San Luis Potosi",
             "Sinaloa",
             "Sonora",
             "Tabasco",
