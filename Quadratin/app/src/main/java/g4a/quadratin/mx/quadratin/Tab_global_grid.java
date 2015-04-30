@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -28,6 +27,7 @@ public class Tab_global_grid extends Fragment {
     //start fragment vars
     private View root_view;
     private LinearLayout root_scroll_view;
+    private final static int PADDING_LEFT_TIGHT = 10;
     //end fragment vars
 
     //start grid data vars
@@ -169,9 +169,6 @@ public class Tab_global_grid extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root_view = inflater.inflate(R.layout.tab_global_layout,container,false);
         root_scroll_view = (LinearLayout) root_view.findViewById(R.id.linear_layout);
-
-        //new FillGridTask().execute();
-
         return root_view;
     }
 
@@ -184,7 +181,6 @@ public class Tab_global_grid extends Fragment {
     public void inflate_rows() {
         new FillGridTask().execute();
     }
-
 
     private class FillGridTask extends AsyncTask<String, Integer, Integer> {
 
@@ -256,11 +252,9 @@ public class Tab_global_grid extends Fragment {
 
 
     private View fill_root_view() {
-
         for( int position=0; position<grid_item_data_groups.length; position++ ) {
             new FillRowTask().execute(position);
         }
-
         return root_view;
     }
 
@@ -387,7 +381,13 @@ public class Tab_global_grid extends Fragment {
         //for Layout grid_type_a.xml
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
-        //new InflateView(layout_grid,item_group).execute();
+
+        if( position == 0 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,2);
+        else if( position == grid_items_data.length -1 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,0);
+        else
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,2);
 
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
@@ -400,18 +400,30 @@ public class Tab_global_grid extends Fragment {
         ViewGroup group_container_right = (ViewGroup) ((ViewGroup) group_container).getChildAt(1);
 
 
-        RelativeLayout item_aa = (RelativeLayout) group_container_left.getChildAt(0);
-        RelativeLayout item_bb = (RelativeLayout) group_container_right.getChildAt(0);
-        RelativeLayout item_cc = (RelativeLayout) group_container_right.getChildAt(1);
+        ViewGroup item_aa = (ViewGroup) group_container_left.getChildAt(0);
+        ViewGroup item_bb = (ViewGroup) group_container_right.getChildAt(0);
+        ViewGroup item_cc = (ViewGroup) group_container_right.getChildAt(1);
         //set data to items
+        //images
+        ((ImageView) item_aa.getChildAt(0)).setImageResource(item_data_a.item_image);
+        ((ImageView) item_bb.getChildAt(0)).setImageResource(item_data_b.item_image);
+        ((ImageView) item_cc.getChildAt(0)).setImageResource(item_data_c.item_image);
 
-        ((ImageView) ((ViewGroup) item_aa).getChildAt(0)).setImageResource(item_data_a.item_image);
-        ((ImageView) ((ViewGroup) item_bb).getChildAt(0)).setImageResource(item_data_b.item_image);
-        ((ImageView) ((ViewGroup) item_cc).getChildAt(0)).setImageResource(item_data_c.item_image);
         //set cat titles
-        ((TextView) ((ViewGroup) ((ViewGroup) ((ViewGroup) group_container_left.getChildAt(0)).getChildAt(1)).getChildAt(0)).getChildAt(0) ).setText(item_data_a.item_category_title);
-        ((TextView) ((ViewGroup) ((ViewGroup) ((ViewGroup) group_container_right.getChildAt(0)).getChildAt(1)).getChildAt(0)).getChildAt(0) ).setText(item_data_b.item_category_title);
-        ((TextView) ((ViewGroup) ((ViewGroup) ((ViewGroup) group_container_right.getChildAt(1)).getChildAt(1)).getChildAt(0)).getChildAt(0) ).setText(item_data_c.item_category_title);
+        //a
+        ViewGroup group_category = (ViewGroup) item_aa.getChildAt(1);
+        ((TextView) ((ViewGroup) group_category.getChildAt(0)).getChildAt(0) ).setText(item_data_a.item_category_title); //category name
+        ((TextView) ((ViewGroup) group_category.getChildAt(0)).getChildAt(1) ).setText(position+":"+position); //post date
+        ((TextView) group_category.getChildAt(1) ).setText("Post title - "+position); //post title
+        //b
+        group_category = (ViewGroup) item_bb.getChildAt(1);
+        ((TextView) group_category.getChildAt(0) ).setText(item_data_b.item_category_title); //category
+        ((TextView) group_category.getChildAt(1) ).setText("+"+position); //num posts
+        //c
+        group_category = (ViewGroup) item_cc.getChildAt(1);
+        ((TextView) group_category.getChildAt(0) ).setText(item_data_c.item_category_title); //category
+        ((TextView) group_category.getChildAt(1) ).setText("+"+position); //num posts
+
 
         //item click
         item_aa.setOnLongClickListener(new Item_long_click_listener());
@@ -433,6 +445,13 @@ public class Tab_global_grid extends Fragment {
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
 
+        if( position == 0 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,2);
+        else if( position == grid_items_data.length -1 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,0);
+        else
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,2);
+
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
         Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
@@ -440,17 +459,28 @@ public class Tab_global_grid extends Fragment {
 
         //get child elements
         ViewGroup group_container = ((ViewGroup) layout_grid.findViewById(grid_layout_containers[item_group.grid_layout]));
-        RelativeLayout item_aa = (RelativeLayout) group_container.getChildAt(0);
-        RelativeLayout item_bb = (RelativeLayout) group_container.getChildAt(1);
-        RelativeLayout item_cc = (RelativeLayout) group_container.getChildAt(2);
+        ViewGroup item_aa = (ViewGroup) group_container.getChildAt(0);
+        ViewGroup item_bb = (ViewGroup) group_container.getChildAt(1);
+        ViewGroup item_cc = (ViewGroup) group_container.getChildAt(2);
         //set data to items
-        ((ImageView) ((ViewGroup) item_aa).getChildAt(0)).setImageResource(item_data_a.item_image);
-        ((ImageView) ((ViewGroup) item_bb).getChildAt(0)).setImageResource(item_data_b.item_image);
-        ((ImageView) ((ViewGroup) item_cc).getChildAt(0)).setImageResource(item_data_c.item_image);
+        ((ImageView) item_aa.getChildAt(0)).setImageResource(item_data_a.item_image);
+        ((ImageView) item_bb.getChildAt(0)).setImageResource(item_data_b.item_image);
+        ((ImageView) item_cc.getChildAt(0)).setImageResource(item_data_c.item_image);
+
         //set cat titles
-        ((TextView) ((ViewGroup) ((ViewGroup) item_aa.getChildAt(1)).getChildAt(0)).getChildAt(0) ).setText(item_data_a.item_category_title);
-        ((TextView) ((ViewGroup) ((ViewGroup) item_bb.getChildAt(1)).getChildAt(0)).getChildAt(0) ).setText(item_data_b.item_category_title);
-        ((TextView) ((ViewGroup) ((ViewGroup) item_cc.getChildAt(1)).getChildAt(0)).getChildAt(0) ).setText(item_data_c.item_category_title);
+        //a
+        ViewGroup group_category = (ViewGroup) item_aa.getChildAt(1);
+        ((TextView) group_category.getChildAt(0) ).setText(item_data_a.item_category_title); //category
+        ((TextView) group_category.getChildAt(1) ).setText("+"+position); //num posts
+        //b
+        group_category = (ViewGroup) item_bb.getChildAt(1);
+        ((TextView) group_category.getChildAt(0) ).setText(item_data_b.item_category_title); //category
+        ((TextView) group_category.getChildAt(1) ).setText("+"+position); //num posts
+        //c
+        group_category = (ViewGroup) item_cc.getChildAt(1);
+        ((TextView) group_category.getChildAt(0) ).setText(item_data_c.item_category_title); //category
+        ((TextView) group_category.getChildAt(1) ).setText("+"+position); //num posts
+
 
         //item click
         item_aa.setOnLongClickListener(new Item_long_click_listener());
@@ -469,19 +499,33 @@ public class Tab_global_grid extends Fragment {
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
 
+        if( position == 0 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,2);
+        else if( position == grid_items_data.length -1 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,0);
+        else
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,2);
+
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
         Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
         //get child elements
         ViewGroup group_container = ((ViewGroup) layout_grid.findViewById(grid_layout_containers[item_group.grid_layout]));
-        RelativeLayout item_aa = (RelativeLayout) group_container.getChildAt(0);
-        RelativeLayout item_bb = (RelativeLayout) group_container.getChildAt(1);
+        ViewGroup item_aa = (ViewGroup) group_container.getChildAt(0);
+        ViewGroup item_bb = (ViewGroup) group_container.getChildAt(1);
         //set data to items
-        ((ImageView) ((ViewGroup) item_aa).getChildAt(0)).setImageResource(item_data_a.item_image);
-        ((ImageView) ((ViewGroup) item_bb).getChildAt(0)).setImageResource(item_data_b.item_image);
+        ((ImageView) item_aa.getChildAt(0)).setImageResource(item_data_a.item_image);
+        ((ImageView) item_bb.getChildAt(0)).setImageResource(item_data_b.item_image);
         //set cat titles
-        ((TextView) ((ViewGroup) ((ViewGroup) item_aa.getChildAt(1)).getChildAt(0)).getChildAt(0) ).setText(item_data_a.item_category_title);
-        ((TextView) ((ViewGroup) ((ViewGroup) item_bb.getChildAt(1)).getChildAt(0)).getChildAt(0) ).setText(item_data_b.item_category_title);
+        //a
+        ViewGroup group_category = (ViewGroup) item_aa.getChildAt(1);
+        ((TextView) group_category.getChildAt(0) ).setText(item_data_a.item_category_title); //category
+        ((TextView) group_category.getChildAt(1) ).setText("+"+position); //num posts
+        //b
+        group_category = (ViewGroup) item_bb.getChildAt(1);
+        ((TextView) ((ViewGroup) group_category.getChildAt(0)).getChildAt(0) ).setText(item_data_b.item_category_title); //category
+        ((TextView) ((ViewGroup) group_category.getChildAt(0)).getChildAt(1) ).setText(position+":"+position); //post date
+        ((TextView) group_category.getChildAt(1) ).setText("Post title - "+position); //post date
 
         //item click
         item_aa.setOnLongClickListener(new Item_long_click_listener());
@@ -495,22 +539,37 @@ public class Tab_global_grid extends Fragment {
     }
 
     private View grid_layout_d_inflate(View layout_grid, LayoutInflater inflater, Grid_item_data_group item_group, int position) {
+
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
+
+        if( position == 0 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,2);
+        else if( position == grid_items_data.length -1 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,0);
+        else
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,2);
 
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
         Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
         //get child elements
         ViewGroup group_container = ((ViewGroup) layout_grid.findViewById(grid_layout_containers[item_group.grid_layout]));
-        RelativeLayout item_aa = (RelativeLayout) group_container.getChildAt(0);
-        RelativeLayout item_bb = (RelativeLayout) group_container.getChildAt(1);
+        ViewGroup item_aa = (ViewGroup) group_container.getChildAt(0);
+        ViewGroup item_bb = (ViewGroup) group_container.getChildAt(1);
         //set data to items
-        ((ImageView) ((ViewGroup) item_aa).getChildAt(0)).setImageResource(item_data_a.item_image);
-        ((ImageView) ((ViewGroup) item_bb).getChildAt(0)).setImageResource(item_data_b.item_image);
+        ((ImageView) item_aa.getChildAt(0)).setImageResource(item_data_a.item_image);
+        ((ImageView) item_bb.getChildAt(0)).setImageResource(item_data_b.item_image);
         //set cat titles
-        ((TextView) ((ViewGroup) ((ViewGroup) item_aa.getChildAt(1)).getChildAt(0)).getChildAt(0) ).setText(item_data_a.item_category_title);
-        ((TextView) ((ViewGroup) ((ViewGroup) item_bb.getChildAt(1)).getChildAt(0)).getChildAt(0) ).setText(item_data_b.item_category_title);
+        //a
+        ViewGroup group_category = (ViewGroup) item_aa.getChildAt(1);
+        ((TextView) ((ViewGroup) group_category.getChildAt(0)).getChildAt(0) ).setText(item_data_a.item_category_title); //category
+        ((TextView) ((ViewGroup) group_category.getChildAt(0)).getChildAt(1) ).setText(position+":"+position); //post date
+        ((TextView) group_category.getChildAt(1) ).setText("Post title - "+position); //post date
+        //b
+        group_category = (ViewGroup) item_bb.getChildAt(1);
+        ((TextView) group_category.getChildAt(0) ).setText(item_data_b.item_category_title); //category
+        ((TextView) group_category.getChildAt(1) ).setText("+"+position); //num posts
 
         //item click
         item_aa.setOnLongClickListener(new Item_long_click_listener());
@@ -519,7 +578,6 @@ public class Tab_global_grid extends Fragment {
         //DnD listener
         item_aa.setOnDragListener(new DragNDropListener());
         item_bb.setOnDragListener(new DragNDropListener());
-
         return layout_grid;
     }
 
@@ -527,15 +585,27 @@ public class Tab_global_grid extends Fragment {
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
 
+        Log.i("POSITION",grid_items_data.length+" == "+position);
+        if( position == 0 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,2);
+        else if( position == grid_items_data.length )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,0);
+        else
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,2);
+
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
         //get child elements
         ViewGroup group_container = ((ViewGroup) layout_grid.findViewById(grid_layout_containers[item_group.grid_layout]));
-        RelativeLayout item_aa = (RelativeLayout) group_container.getChildAt(0);
+        ViewGroup item_aa = (ViewGroup) group_container.getChildAt(0);
         //set data to items
-        ((ImageView) ((ViewGroup) item_aa).getChildAt(0)).setImageResource(item_data_a.item_image);
+        ((ImageView) item_aa.getChildAt(0)).setImageResource(item_data_a.item_image);
         //set cat titles
-        ((TextView) ((ViewGroup) ((ViewGroup) item_aa.getChildAt(1)).getChildAt(0)).getChildAt(0) ).setText(item_data_a.item_category_title);
+        //a
+        ViewGroup group_category = (ViewGroup) item_aa.getChildAt(1);
+        ((TextView) ((ViewGroup) group_category.getChildAt(0)).getChildAt(0) ).setText(item_data_a.item_category_title); //category
+        ((TextView) ((ViewGroup) group_category.getChildAt(0)).getChildAt(1) ).setText(position+":"+position); //post date
+        ((TextView) group_category.getChildAt(1) ).setText("Post title - "+position); //post date
 
         //item click
         item_aa.setOnLongClickListener(new Item_long_click_listener());

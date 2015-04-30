@@ -4,215 +4,150 @@
     android:layout_width="match_parent"
     android:layout_height="100sp"
     android:orientation="horizontal"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:padding="0dp"
     android:id="@+id/grid_container_b">
 
+
     <RelativeLayout
-        android:id="@+id/grid_b_item_a"
-        android:layout_gravity="fill_horizontal"
         android:layout_weight="1"
         android:layout_width="1sp"
         android:layout_height="100sp"
-        android:padding="1dp">
+        android:paddingRight="1dp">
         <ImageView
-            android:id="@+id/grid_img_a"
-            android:layout_centerVertical="true"
-            android:layout_gravity="fill_horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
             android:adjustViewBounds="true"
-            android:padding="0dp"
             android:scaleType="centerCrop"
             android:background="@color/CardBkgColor"/>
-
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:background="@color/cardContentBkgColor"
-            android:gravity="left|bottom|right|center_horizontal"
-            android:paddingLeft="8dp"
-            android:paddingTop="4dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="4dp"
-            android:layout_alignParentBottom="true" >
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Category"
-                    android:id="@+id/textView4"
-                    android:layout_gravity="left"
-                    android:layout_weight="2"
-                    android:capitalize="characters"
-                    android:textColor="@color/CardContentTextColorOrange"
-                    android:textStyle="bold"
-                    android:gravity="left"
-                    android:clickable="false"
-                    android:autoText="false" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="+99"
-                    android:id="@+id/textView5"
-                    android:layout_weight="1"
-                    android:layout_gravity="right"
-                    android:textColor="@color/CardContentTextColorwhite"
-                    android:textStyle="normal"
-                    android:gravity="right" />
-            </LinearLayout>
-        </LinearLayout>
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/grid_b_item_b"
-        android:layout_gravity="fill_horizontal"
-        android:layout_weight="1"
-        android:layout_width="1sp"
-        android:layout_height="100sp"
-        android:padding="1dp">
-        <ImageView
-            android:id="@+id/grid_img_b"
-            android:layout_centerVertical="true"
-            android:layout_gravity="fill_horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:adjustViewBounds="true"
-            android:padding="0dp"
-            android:scaleType="centerCrop"
-            android:background="@color/CardBkgColor"/>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:background="@color/cardContentBkgColor"
-            android:gravity="left|bottom|right|center_horizontal"
-            android:paddingLeft="8dp"
-            android:paddingTop="4dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="4dp"
-            android:layout_alignParentBottom="true" >
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Category"
-                    android:id="@+id/textView6"
-                    android:layout_gravity="left"
-                    android:layout_weight="2"
-                    android:capitalize="characters"
-                    android:textColor="@color/CardContentTextColorOrange"
-                    android:textStyle="bold"
-                    android:gravity="left"
-                    android:clickable="false"
-                    android:autoText="false" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="+99"
-                    android:id="@+id/textView7"
-                    android:layout_weight="1"
-                    android:layout_gravity="right"
-                    android:textColor="@color/CardContentTextColorwhite"
-                    android:textStyle="normal"
-                    android:gravity="right" />
-            </LinearLayout>
-        </LinearLayout>
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/grid_b_item_c"
-        android:layout_gravity="fill_horizontal"
-        android:layout_weight="1"
-        android:layout_width="1sp"
-        android:layout_height="100sp"
-        android:padding="1dp">
-        <ImageView
-            android:id="@+id/grid_img_c"
-            android:layout_centerVertical="true"
-            android:layout_gravity="fill_horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:adjustViewBounds="true"
-            android:padding="0dp"
-            android:scaleType="centerCrop"
-            android:background="@color/CardBkgColor"/>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:background="@color/cardContentBkgColor"
-            android:gravity="left|bottom|right|center_horizontal"
             android:paddingLeft="8dp"
             android:paddingTop="4dp"
             android:paddingRight="8dp"
             android:paddingBottom="4dp"
             android:layout_alignParentBottom="true">
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Category"
-                    android:id="@+id/textView8"
+                    android:text="Versiones estenográficas"
                     android:layout_gravity="left"
-                    android:layout_weight="2"
-                    android:capitalize="characters"
                     android:textColor="@color/CardContentTextColorOrange"
+                    android:textAllCaps="true"
                     android:textStyle="bold"
                     android:gravity="left"
-                    android:clickable="false"
-                    android:autoText="false" />
-
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:layout_weight="3"/>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="+99"
-                    android:id="@+id/textView9"
-                    android:layout_weight="1"
                     android:layout_gravity="right"
                     android:textColor="@color/CardContentTextColorwhite"
                     android:textStyle="normal"
-                    android:gravity="right" />
-            </LinearLayout>
+                    android:gravity="right"
+                    android:layout_weight="7"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="1sp"
+        android:layout_height="100sp"
+        android:paddingRight="1dp"
+        android:paddingLeft="1dp">
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:background="@color/CardBkgColor"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cardContentBkgColor"
+            android:paddingLeft="8dp"
+            android:paddingTop="4dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="4dp"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Versiones estenográficas"
+                android:layout_gravity="left"
+                android:textColor="@color/CardContentTextColorOrange"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:gravity="left"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_weight="3"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="+99"
+                android:layout_gravity="right"
+                android:textColor="@color/CardContentTextColorwhite"
+                android:textStyle="normal"
+                android:gravity="right"
+                android:layout_weight="7"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="1sp"
+        android:layout_height="100sp"
+        android:paddingLeft="1dp">
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:background="@color/CardBkgColor"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cardContentBkgColor"
+            android:paddingLeft="8dp"
+            android:paddingTop="4dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="4dp"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Versiones estenográficas"
+                android:layout_gravity="left"
+                android:textColor="@color/CardContentTextColorOrange"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:gravity="left"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_weight="3"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="+99"
+                android:layout_gravity="right"
+                android:textColor="@color/CardContentTextColorwhite"
+                android:textStyle="normal"
+                android:gravity="right"
+                android:layout_weight="7"/>
         </LinearLayout>
     </RelativeLayout>
 

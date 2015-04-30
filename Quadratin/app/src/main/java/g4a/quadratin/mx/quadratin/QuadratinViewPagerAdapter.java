@@ -36,6 +36,14 @@ public class QuadratinViewPagerAdapter extends FragmentStatePagerAdapter {
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
+
 
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
@@ -50,6 +58,13 @@ public class QuadratinViewPagerAdapter extends FragmentStatePagerAdapter {
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
+
 
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
@@ -64,6 +79,14 @@ public class QuadratinViewPagerAdapter extends FragmentStatePagerAdapter {
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
+
 
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
@@ -78,6 +101,11 @@ public class QuadratinViewPagerAdapter extends FragmentStatePagerAdapter {
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
             new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_cultura),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_politica),
+            new Grid_item_data_source(0,0,String.valueOf(count_items++),R.drawable.q_test_img_economia),
 
 
     };

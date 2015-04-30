@@ -3,93 +3,63 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100sp"
-    android:orientation="horizontal"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:padding="0dp"
     android:id="@+id/grid_container_e">
 
     <RelativeLayout
-        android:id="@+id/grid_e_item_a"
         android:layout_gravity="fill_horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="100sp"
-        android:padding="1dp">
+        android:layout_weight="2"
+        android:layout_width="1sp"
+        android:layout_height="100sp">
         <ImageView
-            android:id="@+id/grid_img_a"
-            android:layout_centerVertical="true"
-            android:layout_gravity="fill_horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
             android:adjustViewBounds="true"
-            android:padding="0dp"
             android:scaleType="centerCrop"
             android:background="@color/CardBkgColor"/>
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/grid_img_a"
-            android:layout_centerHorizontal="true"
             android:background="@color/cardContentBkgColor"
-            android:gravity="left|bottom|right|center_horizontal"
             android:paddingLeft="8dp"
             android:paddingTop="4dp"
             android:paddingRight="8dp"
             android:paddingBottom="10dp"
-            android:layout_alignParentBottom="true" >
-
+            android:layout_alignParentBottom="true">
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Category"
-                    android:id="@+id/textView20"
-                    android:layout_gravity="left"
-                    android:layout_weight="2"
-                    android:capitalize="characters"
+                    android:text="Category Category Category"
                     android:textColor="@color/CardContentTextColorOrange"
+                    android:textAllCaps="true"
                     android:textStyle="bold"
                     android:gravity="left"
-                    android:clickable="false"
-                    android:autoText="false" />
-
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:layout_weight="3"/>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="09:35"
-                    android:id="@+id/textView21"
-                    android:layout_weight="1"
                     android:layout_gravity="right"
                     android:textColor="@color/CardContentTextColorOrange"
                     android:textStyle="normal"
-                    android:gravity="right" />
+                    android:gravity="right"
+                    android:layout_weight="7"/>
             </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="The post title"
-                    android:id="@+id/textView22"
-                    android:gravity="left"
-                    android:textColor="@color/CardContentTextColorwhite" />
-            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="The post title"
+                android:textColor="@color/CardContentTextColorwhite"/>
         </LinearLayout>
     </RelativeLayout>
 
