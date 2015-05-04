@@ -13,7 +13,7 @@
         android:background="@color/colorFFF">
 
         <include
-            layout="@layout/quadratin_custom_toolbar_main"
+            layout="@layout/quadratin_main_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />

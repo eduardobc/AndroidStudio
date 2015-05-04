@@ -11,7 +11,7 @@
     android:padding="0dp">
 
     <include
-        layout="@layout/quadratin_custom_toolbar_intro"
+        layout="@layout/quadratin_intro_toollbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />

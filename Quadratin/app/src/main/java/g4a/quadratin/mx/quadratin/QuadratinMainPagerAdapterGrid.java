@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,7 @@ import android.widget.TextView;
 /**
  * Created by eduardo on 4/8/15.
  */
-public class Tab_global_grid extends Fragment {
+public class QuadratinMainPagerAdapterGrid extends Fragment {
 
     //start fragment vars
     private View root_view;
@@ -40,11 +39,11 @@ public class Tab_global_grid extends Fragment {
     /*Start grid data*/
     //Grid Layouts
     private Integer grid_layouts[] = new Integer[]{
-            R.layout.grid_type_a,
-            R.layout.grid_type_b,
-            R.layout.grid_type_c,
-            R.layout.grid_type_d,
-            R.layout.grid_type_e,
+            R.layout.quadratin_grid_a,
+            R.layout.quadratin_grid_b,
+            R.layout.quadratin_grid_c,
+            R.layout.quadratin_grid_d,
+            R.layout.quadratin_grid_e,
     };
     //Grid Layouts -> Containers
     private Integer grid_layout_containers[] = new Integer[]{
@@ -55,7 +54,7 @@ public class Tab_global_grid extends Fragment {
             R.id.grid_container_e,
     };
     private Object[] grid_items_data,grid_data_items_original;
-    private Grid_item_data_group[] grid_item_data_groups;
+    private QuadratinMainDataGridGroupItems[] grid_item_data_groups;
     private View item_vh_dragged;//current item dragging
     private View item_vh_dropped;//current item dropping
     /*End grid data*/
@@ -109,7 +108,7 @@ public class Tab_global_grid extends Fragment {
             group[0] = grid_items_data[grid_items_count++];
             group[1] = grid_items_data[grid_items_count++];
             group[2] = grid_items_data[grid_items_count++];
-            grid_item_data_groups[grid_fill_rows_count++] = new Grid_item_data_group(0,group);
+            grid_item_data_groups[grid_fill_rows_count++] = new QuadratinMainDataGridGroupItems(0,group);
             //Log.i("GRID ITEMS", "A=3");
         }
         //B=3
@@ -118,7 +117,7 @@ public class Tab_global_grid extends Fragment {
             group[0] = grid_items_data[grid_items_count++];
             group[1] = grid_items_data[grid_items_count++];
             group[2] = grid_items_data[grid_items_count++];
-            grid_item_data_groups[grid_fill_rows_count++] = new Grid_item_data_group(1,group);
+            grid_item_data_groups[grid_fill_rows_count++] = new QuadratinMainDataGridGroupItems(1,group);
             //Log.i("GRID ITEMS","B=3");
         }
         //C=2
@@ -126,7 +125,7 @@ public class Tab_global_grid extends Fragment {
             Object group[] = new Object[2];
             group[0] = grid_items_data[grid_items_count++];
             group[1] = grid_items_data[grid_items_count++];
-            grid_item_data_groups[grid_fill_rows_count++] = new Grid_item_data_group(2,group);
+            grid_item_data_groups[grid_fill_rows_count++] = new QuadratinMainDataGridGroupItems(2,group);
             //Log.i("GRID ITEMS","C=2");
         }
         //D=2
@@ -134,13 +133,13 @@ public class Tab_global_grid extends Fragment {
             Object group[] = new Object[2];
             group[0] = grid_items_data[grid_items_count++];
             group[1] = grid_items_data[grid_items_count++];
-            grid_item_data_groups[grid_fill_rows_count++] = new Grid_item_data_group(3,group);
+            grid_item_data_groups[grid_fill_rows_count++] = new QuadratinMainDataGridGroupItems(3,group);
             //Log.i("GRID ITEMS","D=2");
         } else if( (grid_data_items_original.length-grid_items_count) > 0 ) {
             //E=1
             Object group[] = new Object[1];
             group[0] = grid_items_data[grid_items_count++];
-            grid_item_data_groups[grid_fill_rows_count++] = new Grid_item_data_group(4,group);
+            grid_item_data_groups[grid_fill_rows_count++] = new QuadratinMainDataGridGroupItems(4,group);
             //Log.i("GRID ITEMS","E=1");
         } else {
             grid_iteration_finish = true;
@@ -157,7 +156,7 @@ public class Tab_global_grid extends Fragment {
         grid_iteration_finish = false;
         grid_items_count = 0;
         //Log.i("GRID TOTAL ROWS",""+grid_view_total_rows);
-        grid_item_data_groups = new Grid_item_data_group[grid_view_total_rows];
+        grid_item_data_groups = new QuadratinMainDataGridGroupItems[grid_view_total_rows];
         grid_fill_items_rows();
     }
 
@@ -168,7 +167,7 @@ public class Tab_global_grid extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        root_view = inflater.inflate(R.layout.tab_global_layout,container,false);
+        root_view = inflater.inflate(R.layout.quadratin_main_pager_adapter_grid,container,false);
         root_scroll_view = (LinearLayout) root_view.findViewById(R.id.linear_layout);
         return root_view;
     }
@@ -204,7 +203,7 @@ public class Tab_global_grid extends Fragment {
     private class FillRowTask extends AsyncTask<Integer, Integer, Integer> {
         private Integer position;
         private View layout_grid = null;
-        private Grid_item_data_group item_group = null;
+        private QuadratinMainDataGridGroupItems item_group = null;
         private LayoutInflater inflater;
 
         public FillRowTask() {
@@ -216,7 +215,7 @@ public class Tab_global_grid extends Fragment {
             //Log.i("FillRowTask","doInBackground");
             position = positions[0];
 
-            item_group = (Grid_item_data_group) grid_item_data_groups[position];
+            item_group = (QuadratinMainDataGridGroupItems) grid_item_data_groups[position];
             if (item_group.grid_layout == 0)
                 layout_grid = grid_layout_a_inflate(layout_grid, inflater, item_group, position);
             else if (item_group.grid_layout == 1)
@@ -395,9 +394,9 @@ public class Tab_global_grid extends Fragment {
 
 
 
-    private View grid_layout_a_inflate(View layout_grid, LayoutInflater inflater, Grid_item_data_group item_group, int position) {
+    private View grid_layout_a_inflate(View layout_grid, LayoutInflater inflater, QuadratinMainDataGridGroupItems item_group, int position) {
 
-        //for Layout grid_type_a.xml
+        //for Layout quadratin_grid_a.xmla.xml
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
 
@@ -409,9 +408,9 @@ public class Tab_global_grid extends Fragment {
             layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
 
         //get data from data source array
-        Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
-        Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
-        Grid_item_data_source item_data_c = ((Grid_item_data_source) item_group.group_items[2]);
+        QuadratinMainDataGridItem item_data_a = ((QuadratinMainDataGridItem) item_group.group_items[0]);
+        QuadratinMainDataGridItem item_data_b = ((QuadratinMainDataGridItem) item_group.group_items[1]);
+        QuadratinMainDataGridItem item_data_c = ((QuadratinMainDataGridItem) item_group.group_items[2]);
 
         //get child elements
         ViewGroup group_container = ((ViewGroup) layout_grid.findViewById(grid_layout_containers[item_group.grid_layout]));
@@ -465,7 +464,7 @@ public class Tab_global_grid extends Fragment {
 
 
 
-    private View grid_layout_b_inflate(View layout_grid, LayoutInflater inflater, Grid_item_data_group item_group, int position) {
+    private View grid_layout_b_inflate(View layout_grid, LayoutInflater inflater, QuadratinMainDataGridGroupItems item_group, int position) {
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
 
@@ -477,9 +476,9 @@ public class Tab_global_grid extends Fragment {
             layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
 
         //get data from data source array
-        Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
-        Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
-        Grid_item_data_source item_data_c = ((Grid_item_data_source) item_group.group_items[2]);
+        QuadratinMainDataGridItem item_data_a = ((QuadratinMainDataGridItem) item_group.group_items[0]);
+        QuadratinMainDataGridItem item_data_b = ((QuadratinMainDataGridItem) item_group.group_items[1]);
+        QuadratinMainDataGridItem item_data_c = ((QuadratinMainDataGridItem) item_group.group_items[2]);
 
         //get child elements
         ViewGroup group_container = ((ViewGroup) layout_grid.findViewById(grid_layout_containers[item_group.grid_layout]));
@@ -519,7 +518,7 @@ public class Tab_global_grid extends Fragment {
         return layout_grid;
     }
 
-    private View grid_layout_c_inflate(View layout_grid, LayoutInflater inflater, Grid_item_data_group item_group, int position) {
+    private View grid_layout_c_inflate(View layout_grid, LayoutInflater inflater, QuadratinMainDataGridGroupItems item_group, int position) {
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
 
@@ -531,8 +530,8 @@ public class Tab_global_grid extends Fragment {
             layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
 
         //get data from data source array
-        Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
-        Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
+        QuadratinMainDataGridItem item_data_a = ((QuadratinMainDataGridItem) item_group.group_items[0]);
+        QuadratinMainDataGridItem item_data_b = ((QuadratinMainDataGridItem) item_group.group_items[1]);
         //get child elements
         ViewGroup group_container = ((ViewGroup) layout_grid.findViewById(grid_layout_containers[item_group.grid_layout]));
         ViewGroup item_aa = (ViewGroup) group_container.getChildAt(0);
@@ -562,7 +561,7 @@ public class Tab_global_grid extends Fragment {
         return layout_grid;
     }
 
-    private View grid_layout_d_inflate(View layout_grid, LayoutInflater inflater, Grid_item_data_group item_group, int position) {
+    private View grid_layout_d_inflate(View layout_grid, LayoutInflater inflater, QuadratinMainDataGridGroupItems item_group, int position) {
 
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
@@ -575,8 +574,8 @@ public class Tab_global_grid extends Fragment {
             layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
 
         //get data from data source array
-        Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
-        Grid_item_data_source item_data_b = ((Grid_item_data_source) item_group.group_items[1]);
+        QuadratinMainDataGridItem item_data_a = ((QuadratinMainDataGridItem) item_group.group_items[0]);
+        QuadratinMainDataGridItem item_data_b = ((QuadratinMainDataGridItem) item_group.group_items[1]);
         //get child elements
         ViewGroup group_container = ((ViewGroup) layout_grid.findViewById(grid_layout_containers[item_group.grid_layout]));
         ViewGroup item_aa = (ViewGroup) group_container.getChildAt(0);
@@ -605,7 +604,7 @@ public class Tab_global_grid extends Fragment {
         return layout_grid;
     }
 
-    private View grid_layout_e_inflate(View layout_grid, LayoutInflater inflater, Grid_item_data_group item_group, int position) {
+    private View grid_layout_e_inflate(View layout_grid, LayoutInflater inflater, QuadratinMainDataGridGroupItems item_group, int position) {
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
 
@@ -617,7 +616,7 @@ public class Tab_global_grid extends Fragment {
             layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
 
         //get data from data source array
-        Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
+        QuadratinMainDataGridItem item_data_a = ((QuadratinMainDataGridItem) item_group.group_items[0]);
         //get child elements
         ViewGroup group_container = ((ViewGroup) layout_grid.findViewById(grid_layout_containers[item_group.grid_layout]));
         ViewGroup item_aa = (ViewGroup) group_container.getChildAt(0);

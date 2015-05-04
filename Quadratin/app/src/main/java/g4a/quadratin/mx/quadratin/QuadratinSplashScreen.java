@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
 /**
  * Created by eduardo on 4/7/15.
  */
-public class activity_quadratin_splash_screen extends ActionBarActivity {
+public class QuadratinSplashScreen extends ActionBarActivity {
     public static final int secconds = 2;
     public static final int milsecconds = secconds*1000;
     private ProgressBar q_sc_progressbar;
@@ -17,7 +17,7 @@ public class activity_quadratin_splash_screen extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quadratin_splash_screen);
+        setContentView(R.layout.quadratin_splash_screen);
 
         q_sc_progressbar = (ProgressBar)findViewById(R.id.q_sc_progressbar);
         quadratin_start_progressbar();
@@ -36,11 +36,11 @@ public class activity_quadratin_splash_screen extends ActionBarActivity {
             @Override
             public void onFinish() {
                 /*
-                Intent quadratin_activity_intent_intro = new Intent(activity_quadratin_splash_screen.this,activity_quadratin_intro.class);
+                Intent quadratin_activity_intent_intro = new Intent(QuadratinSplashScreen.this,QuadratinIntro.class);
                 startActivity(quadratin_activity_intent_intro);
                 finish();
                 */
-                Intent dreawable_menu_main = new Intent(activity_quadratin_splash_screen.this,Dreawable_menu_main.class);
+                Intent dreawable_menu_main = new Intent(QuadratinSplashScreen.this,QuadratinMain.class);
                 startActivity(dreawable_menu_main);
                 finish();
 

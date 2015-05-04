@@ -14,12 +14,12 @@ import java.util.ArrayList;
 /**
  * Created by eduardo on 4/9/15.
  */
-public class Dreawable_menu_main extends ActionBarActivity {
+public class QuadratinMain extends ActionBarActivity {
 
     /*start sliding tabs*/
 
     ViewPager pager;
-    QuadratinViewPagerAdapter adapter;
+    QuadratinMainPagerAdapter adapter;
     SlidingTabLayout tabs;
     CharSequence Titles[] = {
             "Aguascalientes",
@@ -71,7 +71,7 @@ public class Dreawable_menu_main extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_drawable_menu);
+        setContentView(R.layout.quadratin_main);
 
         //start custom toolbar
         quadratin_custom_toolbar_main();
@@ -91,14 +91,14 @@ public class Dreawable_menu_main extends ActionBarActivity {
         drawerList = (ListView) findViewById(R.id.left_drawer);
 
         //new list
-        ArrayList<DrawerItem> items = new ArrayList<DrawerItem>();
-        items.add(new DrawerItem("",R.drawable.quadratin_logo_dark,1));
+        ArrayList<QuadratinMainMenuDataDrawerItem> items = new ArrayList<QuadratinMainMenuDataDrawerItem>();
+        items.add(new QuadratinMainMenuDataDrawerItem("",R.drawable.quadratin_logo_dark,1));
         for(int i = 0 ; i < tagTitles.length; i++) {
-            items.add(new DrawerItem(tagTitles[i],R.drawable.quadratin_arrow_right_icon,0));
+            items.add(new QuadratinMainMenuDataDrawerItem(tagTitles[i],R.drawable.quadratin_arrow_right_icon,0));
         }
 
         //relations listening
-        drawerList.setAdapter(new DrawerListAdapter(this, items));
+        drawerList.setAdapter(new QuadratinMainMenuDrawerListAdapter(this, items));
 
         //((ImageView)drawerList.getChildAt(0)).setMaxHeight(10);
 
@@ -141,7 +141,7 @@ public class Dreawable_menu_main extends ActionBarActivity {
         quadratin_custom_toolbar_main();
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new QuadratinViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        adapter =  new QuadratinMainPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
@@ -160,7 +160,7 @@ public class Dreawable_menu_main extends ActionBarActivity {
             }
         });
 
-        tabs.setCustomTabView(R.layout.tab_layout, android.R.id.text1);
+        tabs.setCustomTabView(R.layout.sliding_tab_layout, android.R.id.text1);
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);

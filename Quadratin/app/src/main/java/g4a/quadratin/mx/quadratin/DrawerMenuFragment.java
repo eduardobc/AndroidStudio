@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 /**
  * Created by eduardo on 4/9/15.
+ * NOT USED YET
  */
 public class DrawerMenuFragment extends Fragment {
 
@@ -20,7 +21,7 @@ public class DrawerMenuFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tab_global_layout, container, false);
+        View rootView = inflater.inflate(R.layout.quadratin_main_pager_adapter_grid, container, false);
         int i = getArguments().getInt(ARG_ARTICLES_NUMBER);
         String article = getResources().getStringArray(R.array.Tags)[i];
 

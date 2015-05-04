@@ -1,7 +1,6 @@
 package g4a.quadratin.mx.quadratin;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,9 @@ import java.util.List;
 /**
  * Created by eduardo on 4/9/15.
  */
-public class DrawerListAdapter extends ArrayAdapter {
+public class QuadratinMainMenuDrawerListAdapter extends ArrayAdapter {
 
-    public DrawerListAdapter(Context context, List objects) {
+    public QuadratinMainMenuDrawerListAdapter(Context context, List objects) {
         super(context, 0, objects);
     }
 
@@ -29,12 +28,12 @@ public class DrawerListAdapter extends ArrayAdapter {
         }*/
 
         LayoutInflater inflater = (LayoutInflater)parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        DrawerItem item = (DrawerItem) getItem(position);
+        QuadratinMainMenuDataDrawerItem item = (QuadratinMainMenuDataDrawerItem) getItem(position);
 
 
             if (item.getType() == 0) {
 
-                convertView = inflater.inflate(R.layout.test_drawable_listview, null);
+                convertView = inflater.inflate(R.layout.quadratin_main_menu_item, null);
                 ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
                 TextView name = (TextView) convertView.findViewById(R.id.name);
 
@@ -42,8 +41,8 @@ public class DrawerListAdapter extends ArrayAdapter {
                 name.setText(item.getName());
 
             } else {
-                //type header
-                convertView = inflater.inflate(R.layout.header, null);
+                //type quadratin_main_menu_header
+                convertView = inflater.inflate(R.layout.quadratin_main_menu_header, null);
                 ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
 
                 icon.setImageResource(item.getIconId());

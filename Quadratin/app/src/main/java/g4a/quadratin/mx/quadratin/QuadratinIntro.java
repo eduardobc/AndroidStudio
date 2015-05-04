@@ -7,12 +7,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 
 
-public class activity_quadratin_intro extends ActionBarActivity {
+public class QuadratinIntro extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quadratin_intro);
+        setContentView(R.layout.quadratin_intro);
 
         //set custom toolbar
         quadratin_custom_toolbar();
