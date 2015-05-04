@@ -28,6 +28,7 @@ public class Tab_global_grid extends Fragment {
     private View root_view;
     private LinearLayout root_scroll_view;
     private final static int PADDING_LEFT_TIGHT = 10;
+    private final static int PADDING_TOP_BOTTOM = 4;
     //end fragment vars
 
     //start grid data vars
@@ -261,7 +262,22 @@ public class Tab_global_grid extends Fragment {
 
 
 
+    private void drag_and_drop_change_data() {
 
+        Integer item_img_res_id_drag;
+        Integer item_img_res_id_drop;
+        item_img_res_id_drag = (Integer) ((ImageView) ((ViewGroup) item_vh_dragged).getChildAt(0)).getTag();
+        item_img_res_id_drop = (Integer) ((ImageView) ((ViewGroup) item_vh_dropped).getChildAt(0)).getTag();
+
+        ImageView item_img_drag;
+        ImageView item_img_drop;
+        item_img_drag = ((ImageView) ((ViewGroup) item_vh_dragged).getChildAt(0));
+        item_img_drop = ((ImageView) ((ViewGroup) item_vh_dropped).getChildAt(0));
+        item_img_drag.setImageResource(item_img_res_id_drop);
+        item_img_drop.setImageResource(item_img_res_id_drag);
+        item_img_drag.setTag(item_img_res_id_drop);
+        item_img_drop.setTag(item_img_res_id_drag);
+    }
 
 
 
@@ -344,6 +360,9 @@ public class Tab_global_grid extends Fragment {
 
                     //droppped item
                     item_vh_dropped = view;
+
+                    drag_and_drop_change_data();
+
                     //Log.i("DRAG Dropped", "ACTION_DROP Item Tag DROP");
                     //iterchange_items_data();
 
@@ -383,11 +402,11 @@ public class Tab_global_grid extends Fragment {
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
 
         if( position == 0 )
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,2);
-        else if( position == grid_items_data.length -1 )
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,0);
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
+        else if( position == grid_view_total_rows-1 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,0);
         else
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,2);
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
 
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
@@ -408,6 +427,11 @@ public class Tab_global_grid extends Fragment {
         ((ImageView) item_aa.getChildAt(0)).setImageResource(item_data_a.item_image);
         ((ImageView) item_bb.getChildAt(0)).setImageResource(item_data_b.item_image);
         ((ImageView) item_cc.getChildAt(0)).setImageResource(item_data_c.item_image);
+
+        ((ImageView) item_aa.getChildAt(0)).setTag(item_data_a.item_image);
+        ((ImageView) item_bb.getChildAt(0)).setTag(item_data_b.item_image);
+        ((ImageView) item_cc.getChildAt(0)).setTag(item_data_c.item_image);
+
 
         //set cat titles
         //a
@@ -446,11 +470,11 @@ public class Tab_global_grid extends Fragment {
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
 
         if( position == 0 )
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,2);
-        else if( position == grid_items_data.length -1 )
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,0);
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
+        else if( position == grid_view_total_rows-1 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,0);
         else
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,2);
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
 
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
@@ -500,11 +524,11 @@ public class Tab_global_grid extends Fragment {
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
 
         if( position == 0 )
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,2);
-        else if( position == grid_items_data.length -1 )
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,0);
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
+        else if( position == grid_view_total_rows-1 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,0);
         else
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,2);
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
 
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
@@ -544,11 +568,11 @@ public class Tab_global_grid extends Fragment {
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
 
         if( position == 0 )
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,2);
-        else if( position == grid_items_data.length -1 )
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,0);
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
+        else if( position == grid_view_total_rows-1 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,0);
         else
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,2);
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
 
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
@@ -585,13 +609,12 @@ public class Tab_global_grid extends Fragment {
         //set layout for the item
         layout_grid = inflater.inflate(grid_layouts[item_group.grid_layout], null);
 
-        Log.i("POSITION",grid_items_data.length+" == "+position);
         if( position == 0 )
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,2);
-        else if( position == grid_items_data.length )
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,0);
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,0,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
+        else if( position == grid_view_total_rows-1 )
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,0);
         else
-            layout_grid.setPadding(PADDING_LEFT_TIGHT,2,PADDING_LEFT_TIGHT,2);
+            layout_grid.setPadding(PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM,PADDING_LEFT_TIGHT,PADDING_TOP_BOTTOM);
 
         //get data from data source array
         Grid_item_data_source item_data_a = ((Grid_item_data_source) item_group.group_items[0]);
